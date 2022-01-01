@@ -1,16 +1,49 @@
 =begin
 
 Q: 2520 is the smallest number that can be divided by each of the numbers from 1 to 10 without any remainder.
-What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
+  What is the smallest positive number that is evenly divisible by all of the numbers from 1 to 20?
 
-Ans: The Below takes a lot of time, Logic is simple. Find Another Way!
+Ans: Just keep looping in steps of 20, because a number not divisible by 20, we don't need it.
+  Both method takes around 4 sec, good improvement from prev ans
 
 =end
 
-arr1 = []
-(1..1000000000).each do |num|
-    if(num%2 == 0 && num%3 == 0 && num%4 == 0 && num%5 == 0 && num%6 == 0 && num%7 == 0 && num%8 == 0 && num%9 == 0 && num%10 == 0 && num%11 == 0 && num%12 == 0 && num%13 == 0 && num%14 == 0 && num%15 == 0 && num%16 == 0 && num%17 == 0 && num%18 == 0 && num%19 == 0 && num%20 == 0)
-        arr1 << num
+# Method 1: While
+i = 20
+final = 0
+while i < Float::INFINITY do
+  a = false
+  (2..20).each do |n|
+    if i % n != 0
+      a = true
+      break
     end
+  end
+  if !a
+    final = i
+    break
+  end
+  i += 20
 end
-arr1
+
+puts "Method 1: #{ final }"
+
+
+# Method 2: Each
+final_m2 = 0
+(20..).step(20).each do |n|
+  a = false
+  (2..20).each do |m|
+    if n % m != 0
+      a = true
+      break
+    end
+  end
+
+  if !a
+    final_m2 = n
+    break
+  end
+end
+
+puts "Method 2: #{ final_m2 }"
